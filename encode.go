@@ -9,8 +9,8 @@ import (
 	"net/textproto"
 	"sort"
 
-	"github.com/jhillyerd/enmime/internal/coding"
-	"github.com/jhillyerd/enmime/internal/stringutil"
+	"github.com/jrse/enmime/internal/coding"
+	"github.com/jrse/enmime/internal/stringutil"
 )
 
 // b64Percent determines the percent of non-ASCII characters enmime will tolerate before switching

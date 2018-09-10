@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/jhillyerd/enmime"
-	"github.com/jhillyerd/enmime/internal/test"
+	"github.com/jrse/enmime"
+	"github.com/jrse/enmime/internal/test"
 )
 
 func TestEncodePartEmpty(t *testing.T) {

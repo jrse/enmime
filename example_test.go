@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/jhillyerd/enmime"
+	"github.com/jrse/enmime"
 )
 
 // ExampleBuilder illustrates how to build and send a MIME encoded message.

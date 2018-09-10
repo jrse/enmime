@@ -3,7 +3,7 @@ package test
 import (
 	"testing"
 
-	"github.com/jhillyerd/enmime"
+	"github.com/jrse/enmime"
 )
 
 func TestHelperComparePartsEqual(t *testing.T) {

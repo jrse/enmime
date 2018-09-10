@@ -9,7 +9,7 @@ import (
 	"net/textproto"
 	"strings"
 
-	"github.com/jhillyerd/enmime/internal/coding"
+	"github.com/jrse/enmime/internal/coding"
 )
 
 const (

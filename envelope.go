@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/jaytaylor/html2text"
-	"github.com/jhillyerd/enmime/internal/coding"
+	"github.com/jrse/enmime/internal/coding"
 )
 
 // Envelope is a simplified wrapper for MIME email messages.

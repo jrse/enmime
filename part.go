@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/jhillyerd/enmime/internal/coding"
+	"github.com/jrse/enmime/internal/coding"
 )
 
 // Part represents a node in the MIME multipart tree.  The Content-Type, Disposition and File Name
