@@ -349,6 +349,29 @@ func (p *MailBuilder) Send(addr string, a smtp.Auth) error {
 	return smtp.SendMail(addr, a, p.from.Address, recips, buf.Bytes())
 }
 
+func (p *MailBuilder) Write(file string) error {
+	buf := &bytes.Buffer{}
+	root, err := p.Build()
+	if err != nil {
+		return err
+	}
+	err = root.Encode(buf)
+	if err != nil {
+		return err
+	}
+	recips := make([]string, 0, len(p.to)+len(p.cc)+len(p.bcc))
+	for _, a := range p.to {
+		recips = append(recips, a.Address)
+	}
+	for _, a := range p.cc {
+		recips = append(recips, a.Address)
+	}
+	for _, a := range p.bcc {
+		recips = append(recips, a.Address)
+	}
+//	return smtp.SendMail(addr, a, p.from.Address, recips, buf.Bytes())
+	return ioutil.WriteFile(file,buf.Bytes(),0644)
+}
 // Equals uses the reflect package to test two MailBuilder structs for equality, primarily for unit
 // tests.
 func (p *MailBuilder) Equals(o *MailBuilder) bool {
