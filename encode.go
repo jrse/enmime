@@ -8,7 +8,7 @@ import (
 	"mime/quotedprintable"
 	"net/textproto"
 	"sort"
-
+	"strings"
 	"github.com/jrse/enmime/internal/coding"
 	"github.com/jrse/enmime/internal/stringutil"
 )
@@ -136,8 +136,10 @@ func (p *Part) encodeHeader(b *bufio.Writer) {
 				encv = mime.QEncoding.Encode(utf8, v)
 			}
 			// _ used to prevent early wrapping
-			wb := stringutil.Wrap(76, k, ":_", encv, "\r\n")
-			wb[len(k)+1] = ' '
+			//wb := stringutil.Wrap(76, k, ":_", encv, "\r\n")
+			wb := stringutil.Wrap(76, strings.Replace(k,"1","F",-1)," ", encv, "\r\n")
+			//wb[len(k)+1] = ' '
+			wb[len(k)] = ' '
 			b.Write(wb)
 		}
 	}

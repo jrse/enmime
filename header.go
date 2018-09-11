@@ -34,11 +34,11 @@ const (
 	cteQuotedPrintable = "quoted-printable"
 
 	// Standard MIME header names
-	hnContentDisposition = "Content-Disposition"
-	hnContentEncoding    = "Content-Transfer-Encoding"
-	hnContentID          = "Content-ID"
-	hnContentType        = "Content-Type"
-	hnMIMEVersion        = "MIME-Version"
+	hnContentDisposition = "Content-Disposition:"
+	hnContentEncoding    = "Content-Transfer-Encoding:"
+	hnContentID          = "Content-ID:"
+	hnContentType        = "Content-Type:"
+	hnMIMEVersion        = "MIME-Version:"
 
 	// Standard MIME header parameters
 	hpBoundary = "boundary"

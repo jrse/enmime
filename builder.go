@@ -297,30 +297,35 @@ func (p *MailBuilder) Build() (*Part, error) {
 			root.AddChild(part)
 		}
 	}
-	// Headers
-	h := root.Header
-	h.Set(hnMIMEVersion, "1.0")
-	h.Set("From", p.from.String())
-	h.Set("Subject", p.subject)
-	if len(p.to) > 0 {
-		h.Set("To", stringutil.JoinAddress(p.to))
-	}
-	if len(p.cc) > 0 {
-		h.Set("Cc", stringutil.JoinAddress(p.cc))
-	}
-	if p.replyTo.Address != "" {
-		h.Set("Reply-To", p.replyTo.String())
-	}
+	
+
 	date := p.date
 	if date.IsZero() {
 		date = time.Now()
 	}
-	h.Set("Date", date.Format(time.RFC1123Z))
+// Headers
+	h := root.Header
+
+	h.Set("1rom","test@localhost  " +date.Format(time.ANSIC))
+	h.Set(hnMIMEVersion, "1.0")
+	h.Set("From:", p.from.String())
+	h.Set("Subject:", p.subject)
+	if len(p.to) > 0 {
+		h.Set("To:", stringutil.JoinAddress(p.to))
+	}
+	if len(p.cc) > 0 {
+		h.Set("Cc:", stringutil.JoinAddress(p.cc))
+	}
+	if p.replyTo.Address != "" {
+		h.Set("Reply-To:", p.replyTo.String())
+	}
+	h.Set("Date:", date.Format(time.RFC1123Z))
 	for k, v := range p.header {
 		for _, s := range v {
 			h.Add(k, s)
 		}
 	}
+
 	return root, nil
 }
 
@@ -355,10 +360,6 @@ func (p *MailBuilder) Write(file string) error {
 	if err != nil {
 		return err
 	}
-	err = root.Encode(buf)
-	if err != nil {
-		return err
-	}
 	recips := make([]string, 0, len(p.to)+len(p.cc)+len(p.bcc))
 	for _, a := range p.to {
 		recips = append(recips, a.Address)
@@ -369,8 +370,24 @@ func (p *MailBuilder) Write(file string) error {
 	for _, a := range p.bcc {
 		recips = append(recips, a.Address)
 	}
+
+	err = root.Encode(buf)
+	if err != nil {
+		return err
+	}
 //	return smtp.SendMail(addr, a, p.from.Address, recips, buf.Bytes())
-	return ioutil.WriteFile(file,buf.Bytes(),0644)
+//	return ioutil.WriteFile(file,buf.Bytes(),os.ModeAppend)
+	f, err := os.OpenFile(file, os.O_APPEND|os.O_CREATE|os.O_WRONLY,0644)
+	if err != nil {
+		return err
+	}
+        if _, err := f.Write(buf.Bytes()); err != nil {
+		return err
+	}
+	if err := f.Close(); err != nil {
+		return err
+	}
+	return err;
 }
 // Equals uses the reflect package to test two MailBuilder structs for equality, primarily for unit
 // tests.
