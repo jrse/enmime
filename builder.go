@@ -325,7 +325,7 @@ func (p *MailBuilder) Build() (*Part, error) {
 			h.Add(k, s)
 		}
 	}
-
+	h.Set("Message-ID:","<"+p.from.String()+"_@test.com>");
 	return root, nil
 }
 
